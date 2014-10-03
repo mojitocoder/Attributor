@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "StatsViewController.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,19 @@
 @end
 
 @implementation ViewController
+
+// This is how you connect 2 MVCs and pas parameters between them
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString: @"View Stats"])
+    {
+        if ([segue.destinationViewController isKindOfClass: [StatsViewController class]])
+        {
+            StatsViewController *subController = (StatsViewController *)segue.destinationViewController;
+            subController.textToAnalyse = self.textEditor.textStorage;
+        }
+    }
+}
 
 - (IBAction)touchOutline:(UIButton *)sender
 {
